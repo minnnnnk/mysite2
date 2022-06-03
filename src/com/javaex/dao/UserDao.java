@@ -96,7 +96,10 @@ public class UserDao {
 			//SQl문 준비
 			String query = "";
 			query += " select  no ";
+			query += "         ,id	";
 			query += "         ,name  ";
+			query += "         ,password  ";
+			query += "         ,gender  ";
 			query += " from users  ";
 			query += " where id = ?  ";
 			query += " and password = ?  ";
@@ -111,11 +114,17 @@ public class UserDao {
 			//결과처리
 			while(rs.next()) {
 				int no = rs.getInt("no");
+				String id = rs.getString("id");
 				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String gender = rs.getString("gender");
 				
 				authUser = new UserVo();
+				authUser.setId(id);
 				authUser.setNo(no);
 				authUser.setName(name);
+				authUser.setPassword(password);
+				authUser.setGender(gender);
 			}
 			
 			
@@ -127,5 +136,40 @@ public class UserDao {
 		return authUser;
 	}
 	
+	public int update(UserVo userVo) {
+		int count = -1;
+		try {
+			this.getConnecting();
+			
+			
+			// 3. SQL문 준비 / 바인딩 / 실행
+			//SQl문 준비
+			String query = "";
+			query += " update users ";
+			query += " set password = ? ";
+			query += "     ,name = ? ";
+			query += "     ,gender = ? ";
+			query += " where no = ? ";
+			
+			//바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userVo.getPassword());
+			pstmt.setString(2, userVo.getName());
+			pstmt.setString(3, userVo.getGender());
+			pstmt.setInt(4, userVo.getNo());
+
+			//실행
+			count = pstmt.executeUpdate();
+			
+			//결과처리
+			System.out.println(count+ "건 등록되었습니다");
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} 
+		
+		this.Close();
+		return count;
+		
+	}
 	
 }
