@@ -113,13 +113,16 @@ public class UserController extends HttpServlet {
 			
 			
 			//VO에 담기
-			UserVo userVo = new UserVo(password,name,gender);
-			System.out.println(userVo);
+			UserVo authUser = new UserVo(password,name,gender);
+			System.out.println(authUser);
 			
 			//다오만들어서 바꿔주기
 			UserDao userDao = new UserDao();
 			
-			userDao.update(userVo);
+			userDao.update(authUser);
+			
+			HttpSession session =	request.getSession();
+			session.setAttribute("authUser",authUser);
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
