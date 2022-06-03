@@ -13,11 +13,9 @@ public class UserVo {
 	}
 	
 	
-	public UserVo( String password, String name, String gender) {
+	public UserVo(int no) {
 		super();
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
+		this.no = no;
 	}
 
 

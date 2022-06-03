@@ -99,12 +99,27 @@ public class UserController extends HttpServlet {
 		}else if("modifyForm".equals(action)){
 			System.out.println("UserController>modifyForm");
 			
+			HttpSession session =	request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			
+			int no = authUser.getNo();
+			
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getPerson(no);
+			
+			
+			request.setAttribute("userVo", userVo);
 			
 			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 		}else if("modify".equals(action)) {
 			System.out.println("UserController>modify");
 			
 			
+			
+			//세션에서 no
+			HttpSession session =	request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
 			
 			//파라미터 꺼내기
 			String password =  request.getParameter("password");
@@ -113,16 +128,20 @@ public class UserController extends HttpServlet {
 			
 			
 			//VO에 담기
-			UserVo authUser = new UserVo(password,name,gender);
-			System.out.println(authUser);
+			UserVo userVo = new UserVo();
+			System.out.println(userVo);
+			userVo.setNo(no);
+			userVo.setPassword(password);
+			userVo.setName(name);
+			userVo.setGender(gender);
+			
+			
 			
 			//다오만들어서 바꿔주기
 			UserDao userDao = new UserDao();
 			
-			userDao.update(authUser);
+			userDao.update(userVo);
 			
-			HttpSession session =	request.getSession();
-			session.setAttribute("authUser",authUser);
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
