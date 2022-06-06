@@ -129,12 +129,11 @@ public class UserController extends HttpServlet {
 			
 			//VO에 담기
 			UserVo userVo = new UserVo();
-			System.out.println(userVo);
 			userVo.setNo(no);
 			userVo.setPassword(password);
 			userVo.setName(name);
 			userVo.setGender(gender);
-			
+			System.out.println(userVo);
 			
 			
 			//다오만들어서 바꿔주기

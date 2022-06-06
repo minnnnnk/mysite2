@@ -11,6 +11,14 @@ public class GuestBookVo {
 	public GuestBookVo() {
 		super();
 	}
+	
+	public GuestBookVo(String name, String password, String content) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.content = content;
+	}
+
 	public GuestBookVo(int no, String name, String password, String content, String regDate) {
 		super();
 		this.no = no;

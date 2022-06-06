@@ -68,7 +68,9 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="/guestbook" method="get">
+					<form action="./guestbook" method="get">
+					
+						<input type="hidden" name="action" value="add">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -93,7 +95,7 @@
 							
 						</table>
 						<!-- //guestWrite -->
-						<input type="hidden" name="action" value="add">
+						<input type="hidden" name="" value="">
 						
 					</form>	
 					
