@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,13 +20,22 @@ public class GuestBookController extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			request.setCharacterEncoding("UTF-8");
 		 String action = request.getParameter("action");
 		 
-		 WebUtil.forward(request, response, "/WEB-INF/views/guestbook/addList.jsp");
-		 
-		 if("add".equals(action)) {
+		
+		 if("list".equals(action)) {
+			 System.out.println("guestbook>list");
+			 GuestBookDao gDao = new GuestBookDao();
 			 
+			 List<GuestBookVo> gList = gDao.getGuestList();
+			 
+			 request.setAttribute("gList", gList);
+			 
+			 WebUtil.forward(request, response, "/WEB-INF/views/guestbook/addList.jsp");
+		 
+		 }if("add".equals(action)) {
+			 System.out.println("guestbook>add");
 			 String name = request.getParameter("name");
 			 String password = request.getParameter("password");
 			 String content = request.getParameter("content");
@@ -36,16 +46,31 @@ public class GuestBookController extends HttpServlet {
 			 
 			 gDao.add(guestBookVo);
 			 
-			 
-			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/addList.jsp");
-		 }else if ("list".equals(action)) {
-			 
+			 WebUtil.redirect(request, response, "/mysite2/guestbook?action=list");
+		 }if("deleteForm".equals(action)) {
+			 System.out.println("guestbook>deleteForm");
+				
+			 int no =Integer.parseInt(request.getParameter("no"));
 			 GuestBookDao gDao = new GuestBookDao();
+			 GuestBookVo gVo = gDao.getGuest(no);
+			 request.setAttribute("gVo", gVo);
+					 
 			 
-			 gDao.getGuestList();
+			 WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
+		 }if("delete".equals(action)) {
+			 System.out.println("guestbook>delete");
+			 
+			 int no =Integer.parseInt(request.getParameter("no"));
+			 String password = request.getParameter("password");
+			 GuestBookDao gDao = new GuestBookDao();
+			 GuestBookVo gVo = new GuestBookVo(no,password);
+			 System.out.println(gVo);
+			 gDao.delete(gVo);
+
+			 WebUtil.redirect(request, response, "/mysite2/guestbook?action=list");
 		 }
-		
-	}
+	
+	} 	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

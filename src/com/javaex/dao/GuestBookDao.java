@@ -128,14 +128,77 @@ public class GuestBookDao {
 		} 
 		
 		this.Close();
-		
-		
-		
-		
 		return gList;
 	}
 	 
+	public GuestBookVo getGuest(int no) {
+		GuestBookVo gVo = null;
+		try {
+			this.getConnecting();
+			// 3. SQL문 준비 / 바인딩 / 실행
+			//SQl문 준비
+			String query = "";
+			query += " select  no ";
+			query += "         ,name ";
+			query += "         ,password ";
+			query += "         ,content ";
+			query += "         ,reg_date ";
+			query += " from guestbook ";
+			query += " where no = ? ";
+
+			//바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			//실행
+			rs= pstmt.executeQuery();
+			//결과처리
+			while(rs.next()) {
+				int Gno = rs.getInt("no");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String content = rs.getString("content");
+				String regDate = rs.getString("reg_date");
+				
+				gVo = new GuestBookVo(Gno,name,password,content,regDate);
+				
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} 
+		
+		this.Close();
+		return gVo;
+	}
 	
+	public int delete(GuestBookVo gVo) {
+		int count = -1;
+		try {
+			this.getConnecting();
+			// 3. SQL문 준비 / 바인딩 / 실행
+			//SQl문 준비
+			String query = "";
+			query += " delete from guestbook ";
+			query += " where no = ? ";
+			query += " and password = ? ";
+			
+			//바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, gVo.getNo());
+			pstmt.setString(2, gVo.getPassword());
+			
+			//실행
+			count = pstmt.executeUpdate();
+			
+			//결과처리
+			System.out.println(count+ "건 삭제되었습니다");
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} 
+		
+		this.Close();
+		return count;
+	}
 	
 }
 
