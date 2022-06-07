@@ -63,7 +63,7 @@ public class UserDao {
 			//SQl문 준비
 			String query = "";
 			query += " insert into users ";
-			query += " values(SEQ_USERS_NO.nextval,?,?,?,?) ";
+			query += " values(seq_users_no.nextval,?,?,?,?) ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);

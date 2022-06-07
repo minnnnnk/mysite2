@@ -2,9 +2,9 @@
 
 <%@ page import="com.javaex.vo.UserVo" %>
 
-<%
+<%	
+	//헤더 로그인]
 	UserVo authUser = (UserVo)session.getAttribute("authUser");
-	System.out.println(authUser);
 %>
 <!DOCTYPE html>
 <html>
@@ -18,31 +18,9 @@
 
 <body>
 	<div id="wrap">
-
-		<div id="header" class="clearfix">
-			<h1>
-				<a href="/mysite2/main">MySite</a>
-			</h1>
-			
-			<%if(authUser == null) {//로그인실패%>
-				<ul>
-					<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
-					<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
-				</ul>
-			<% }else {//로그인성공%>
-				<ul>
-					<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-					<li><a href="/mysite2/user?action=logout" class="btn_s">로그아웃</a></li>
-					<li><a href="/mysite2/user?action=modifyForm&no=<%=authUser.getNo()%>" class="btn_s">회원정보수정</a></li>
-				</ul>
-			<% }%>
-				
-			
-			
 		
-			
-		</div>
-		<!-- //header -->
+		<!-- header -->
+		<jsp:include page="/WEB-INF/views/inclueds/header.jsp"></jsp:include>
 
 		<div id="nav">
 			<ul class="clearfix">
@@ -98,9 +76,7 @@
 		<!-- //container -->
 		
 		
-		<div id="footer">
-			Copyright ⓒ 2022 김민규. All right reserved
-		</div>
+		<jsp:include page="/WEB-INF/views/inclueds/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>

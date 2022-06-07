@@ -78,7 +78,7 @@ public class UserController extends HttpServlet {
 			}else {
 				System.out.println("로그인성공");
 				
-				HttpSession session =	request.getSession();
+				HttpSession session =	request.getSession(); 
 				session.setAttribute("authUser",authUser);
 				
 				//메인 리다이렉트
