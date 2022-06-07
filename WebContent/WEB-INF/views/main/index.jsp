@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="com.javaex.vo.UserVo" %>
-
-<%	
-	//헤더 로그인]
-	UserVo authUser = (UserVo)session.getAttribute("authUser");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +15,8 @@
 	<div id="wrap">
 		
 		<!-- header -->
-		<jsp:include page="/WEB-INF/views/inclueds/header.jsp"></jsp:include>
-
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
+		
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
@@ -75,8 +70,7 @@
 		</div>
 		<!-- //container -->
 		
-		
-		<jsp:include page="/WEB-INF/views/inclueds/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

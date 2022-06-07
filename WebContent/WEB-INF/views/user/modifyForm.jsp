@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.javaex.vo.UserVo" %>
-
-<%
-	UserVo userVo = (UserVo)request.getAttribute("userVo");
-	System.out.println(userVo);
-
-	/*UserVo authUser = (UserVo)session.getAttribute("authUser");
-
-	System.out.println(authUser);*/
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +15,7 @@
 	<div id="wrap">
 
 		<!-- header -->
-		<jsp:include page="/WEB-INF/views/inclueds/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
 		<div id="nav">
@@ -68,24 +58,24 @@
 					<div id="modifyForm">
 						<form action="/mysite2/user" method="get">
 							<input type ="hidden" name ="action" value="modify">
-							<input type ="hidden" name="no" value="<%=userVo.getNo()%>">
-							<input type ="hidden" name="id" value="<%=userVo.getId()%>">
+							<input type ="hidden" name="no" value="${userVo.no }">
+							<input type ="hidden" name="id" value="${userVo.id }">
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
-								<span class="text-large bold"><%=userVo.getId()%></span>
+								<span class="text-large bold">${userVo.id}</span>
 							</div>
 	
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> 
-								<input type="text" id="input-pass" name="password" value="<%=userVo.getPassword()%>" placeholder="비밀번호를 입력하세요"	>
+								<input type="text" id="input-pass" name="password" value="${userVo.password}" placeholder="비밀번호를 입력하세요"	>
 							</div>
 	
 							<!-- 이메일 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> 
-								<input type="text" id="input-name" name="name" value="<%=userVo.getName()%>" placeholder="이름을 입력하세요">
+								<input type="text" id="input-name" name="name" value="${userVo.name }" placeholder="이름을 입력하세요">
 							</div>
 	
 							<!-- //나이 -->
@@ -118,8 +108,9 @@
 
 		</div>
 		<!-- //container  -->
+		
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 
-		<jsp:include page="/WEB-INF/views/inclueds/footer.jsp"></jsp:include>
 		<!-- //footer -->
 		
 	</div>
