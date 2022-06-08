@@ -12,15 +12,13 @@ public class BoardVo extends UserVo{
 	public BoardVo() {
 		super();
 	}
-	
+
+
 	public BoardVo(int userNo) {
 		super();
 		this.userNo = userNo;
 	}
 
-	
-	
-	
 	public BoardVo(int no, String title, String content) {
 		super();
 		this.no = no;

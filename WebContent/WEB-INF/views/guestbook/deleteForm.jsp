@@ -21,7 +21,7 @@
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/mysite2/board?action=list">게시판</a></li>
 				<li><a href="">갤러리</a></li>
 				<li><a href="/mysite2/guestbook?action=list">방명록</a></li>
 			</ul>
@@ -56,8 +56,8 @@
 				<div id="guestbook">
 					<form action="guestbook" method="get">
 						<input type='hidden' name="action" value="delete">
-						<input type = "text" name="no" value="${gVo.no }">
-						<input type='text' name="name" value="${gVo.name }">
+						<input type = "hidden" name="no" value="${gVo.no }">
+						<input type='hidden' name="name" value="${gVo.name }">
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">

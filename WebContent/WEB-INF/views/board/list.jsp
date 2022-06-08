@@ -22,9 +22,9 @@
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/mysite2/board?action=list">게시판</a></li>
 				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
+				<li><a href="/mysite2/guestbook?action=list">방명록</a></li>
 			</ul>
 		</div>
 		<!-- //nav -->
@@ -82,53 +82,12 @@
 										<td>${vo.hit}</td>
 										<td>${vo.regDate}</td>
 										<c:if test="${authUser.no == vo.userNo}">
-											<td><a href="">[삭제]</a></td>
+											<td><a href="./board?action=delete&no=${vo.no}">[삭제]</a></td>
 										</c:if>
 									</tr>
 								</c:forEach>
 								
 								
-								
-								<%-- <tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<c:if test="${authUser.id}">
-										<td><a href="">[삭제]</a></td>
-									</c:if>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<c:if test="${authUser.id}">
-										<td><a href="">[삭제]</a></td>
-									</c:if>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<c:if test="${authUser.id}">
-										<td><a href="">[삭제]</a></td>
-									</c:if>
-								</tr>
-								<tr class="last">
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<c:if test="${authUser.id}">
-										<td><a href="">[삭제]</a></td>
-									</c:if>
-								</tr> --%>
 							</tbody>
 						</table>
 			

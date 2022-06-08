@@ -71,10 +71,11 @@ public class BoardDao {
 	         query += "         ,content ";
 	         query += "         ,name ";
 	         query += "         ,hit ";
-	         query += "         ,reg_date ";
+	         query += "         ,to_char(reg_date,'YY-MM-DD HH24:MM') reg_date ";
 	         query += "         ,user_no ";
 	         query += " from board b , users u ";
 	         query += " where user_no = u.no ";
+	         query += " order by no desc ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
@@ -200,7 +201,7 @@ public class BoardDao {
 				//실행
 				count = pstmt.executeUpdate();
 				// 4.결과처리
-				System.out.println(count+"건 등록되었습니다.");
+				System.out.println(count+"건 변경되었습니다.");
 			}catch (SQLException e) {
 				System.out.println("error:" + e);
 			} 
@@ -209,7 +210,61 @@ public class BoardDao {
 			return count;
 		}
 	   
+	   public int delete(int no) {
+			int count = -1;
+			
+			try {
+				this.getConnecting();
+				// 3. SQL문 준비 / 바인딩 / 실행
+				
+				//SQL문 준비
+				String query = "";
+				query += " delete from board ";
+				query += " where no = ? ";
+				//바인딩
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, no);
+				
+				//실행
+				count = pstmt.executeUpdate();
+				// 4.결과처리
+				System.out.println(count+"건 삭제되었습니다.");
+			}catch (SQLException e) {
+				System.out.println("error:" + e);
+			} 
+			
+			this.close();
+			return count;
+		}
 	   
-	   
+	   public int hitUpdate(int no) {
+		   int count = -1;
+			
+			try {
+				this.getConnecting();
+				// 3. SQL문 준비 / 바인딩 / 실행
+				
+				//SQL문 준비
+				String query = "";
+				query += " update board ";
+				query += " set hit = hit+1 ";
+				query += " where no = ? ";
+				//바인딩
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, no);
+				
+				//실행
+				count = pstmt.executeUpdate();
+				// 4.결과처리
+				System.out.println(count+"건 삭제되었습니다.");
+			}catch (SQLException e) {
+				System.out.println("error:" + e);
+			} 
+			
+			this.close();
+			return count;
+	   }
 	
 }

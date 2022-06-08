@@ -37,8 +37,9 @@ public class BoardController extends HttpServlet {
 			
 			int no =Integer.parseInt(request.getParameter("no"));
 			BoardDao bDao = new BoardDao();
-			
+			bDao.hitUpdate(no);
 			BoardVo bVo = bDao.getUser(no);
+			
 			System.out.println(bVo);
 			
 			request.setAttribute("bVo", bVo);
@@ -92,7 +93,17 @@ public class BoardController extends HttpServlet {
 			bDao.modify(bVo);
 			WebUtil.redirect(request, response, "./board?action=list");
 		}else if("delete".equals(action)) {
+			System.out.println("boardController>delete");
 			
+			int no =Integer.parseInt(request.getParameter("no"));
+			
+			System.out.println(no);
+			
+			BoardDao bDao = new BoardDao();
+			
+			bDao.delete(no);
+			
+			WebUtil.redirect(request, response, "./board?action=list");
 		}
 		
 	}

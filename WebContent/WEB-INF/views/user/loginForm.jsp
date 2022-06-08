@@ -19,7 +19,7 @@
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/mysite2/board?action=list">게시판</a></li>
 				<li><a href="">갤러리</a></li>
 				<li><a href="/mysite2/guestbook?action=list">방명록</a></li>
 			</ul>
@@ -55,7 +55,7 @@
 				<div id="user">
 					<div id="loginForm">
 						<form action="/mysite2/user" method="get">
-							<input type="text" name="action" value="login">
+							<input type="hidden" name="action" value="login">
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
