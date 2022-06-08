@@ -77,8 +77,8 @@
 								<c:forEach items="${bList}" var="vo">
 									<tr>
 										<td>${vo.no }</td>
-										<td class="text-left"><a href="/mysite2/board?action=read">${vo.title }</a></td>
-										<td>정우성</td>
+										<td class="text-left"><a href="/mysite2/board?action=read&no=${vo.no}">${vo.title }</a></td>
+										<td>${vo.name }</td>
 										<td>${vo.hit}</td>
 										<td>${vo.regDate}</td>
 										<c:if test="${authUser.no == vo.userNo}">

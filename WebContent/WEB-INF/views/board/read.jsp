@@ -60,43 +60,37 @@
 							<!-- 작성자 -->
 							<div class="form-group">
 								<span class="form-text">작성자</span>
-								<span class="form-value">정우성</span>
+								<span class="form-value">${bVo.name }</span>
 							</div>
 							
 							<!-- 조회수 -->
 							<div class="form-group">
 								<span class="form-text">조회수</span>
-								<span class="form-value">123</span>
+								<span class="form-value">${bVo.hit }</span>
 							</div>
 							
 							<!-- 작성일 -->
 							<div class="form-group">
 								<span class="form-text">작성일</span>
-								<span class="form-value">2020-03-02</span>
+								<span class="form-value">${bVo.regDate }</span>
 							</div>
 							
 							<!-- 제목 -->
 							<div class="form-group">
 								<span class="form-text">제 목</span>
-								<span class="form-value">여기에는 글제목이 출력됩니다.</span>
+								<span class="form-value">${bVo.title }</span>
 							</div>
 						
 							<!-- 내용 -->
 							<div id="txt-content">
-								<span class="form-value" >
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
+								<span class="form-value">
+									${bVo.content }									
+									
 								</span>
 							</div>
 							
 							<c:if test="${authUser.no == bVo.userNo}">
-								<a id="btn	_modify" href="/mysite2/board?action=modifyForm">수정</a>
+								<a id="btn_modify" href="/mysite2/board?action=modifyForm&no=${bVo.no}">수정</a>
 							</c:if>	
 							
 							<a id="btn_modify" href="/mysite2/board?action=list">목록</a>

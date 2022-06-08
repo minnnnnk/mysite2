@@ -65,14 +65,16 @@ public class BoardDao {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			
 			//SQL문 준비
-			String query = "";
-			query +=" select  no ";
-			query +="         ,title ";
-			query +="         ,content ";
-			query +="         ,hit ";
-			query +="         ,reg_date ";
-			query +="         ,users_no ";
-			query +=" from board ";
+	         String query = "";
+	         query += " select  b.no ";
+	         query += "         ,title ";
+	         query += "         ,content ";
+	         query += "         ,name ";
+	         query += "         ,hit ";
+	         query += "         ,reg_date ";
+	         query += "         ,user_no ";
+	         query += " from board b , users u ";
+	         query += " where user_no = u.no ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
@@ -80,15 +82,16 @@ public class BoardDao {
 			//실행
 			rs = pstmt.executeQuery();
 			// 4.결과처리
-			while(rs.next()) {
-				int no = rs.getInt("no");
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				int hit = rs.getInt("hit");
-				String regDate = rs.getString("reg_date");
-				int userNo = rs.getInt("users_no");
-				
-				BoardVo bVo = new BoardVo(no,title,content,hit,regDate,userNo);
+	         while(rs.next()) {
+	        	int bno = rs.getInt("no");
+	            String title = rs.getString("title");
+	            String content = rs.getString("content");
+	            String name = rs.getString("name");
+	            int hit = rs.getInt("hit");
+	            String regDate = rs.getString("reg_date");
+	            int userNo = rs.getInt("user_no");
+	            
+	            BoardVo bVo = new BoardVo(bno,title,content,name,hit,regDate,userNo);
 				
 				System.out.println(bVo);
 				
@@ -141,14 +144,14 @@ public class BoardDao {
 		         //SQl문 준비
 		         String query = "";
 		         query += " select  b.no ";
-		         query += "         ,b.title ";
-		         query += "         ,b.content ";
-		         query += "         ,u.name ";
-		         query += "         ,b.hit ";
-		         query += "         ,b.reg_date ";
-		         query += "         ,b.userNo ";
+		         query += "         ,title ";
+		         query += "         ,content ";
+		         query += "         ,name ";
+		         query += "         ,hit ";
+		         query += "         ,reg_date ";
+		         query += "         ,user_no ";
 		         query += " from board b , users u ";
-		         query += " where b.users_no = u.no ";
+		         query += " where user_no = u.no ";
 
 		         //바인딩
 		         pstmt = conn.prepareStatement(query);
@@ -156,13 +159,13 @@ public class BoardDao {
 		         rs= pstmt.executeQuery();
 		         //결과처리
 		         while(rs.next()) {
-		        	int bno = rs.getInt("b.no");
-		            String title = rs.getString("b.title");
-		            String content = rs.getString("b.content");
-		            String name = rs.getString("u.name");
-		            int hit = rs.getInt("b.hit");
+		        	int bno = rs.getInt("no");
+		            String title = rs.getString("title");
+		            String content = rs.getString("content");
+		            String name = rs.getString("name");
+		            int hit = rs.getInt("hit");
 		            String regDate = rs.getString("reg_date");
-		            String userNo = rs.getString("user_no");
+		            int userNo = rs.getInt("user_no");
 		            
 		            bVo = new BoardVo(bno,title,content,name,hit,regDate,userNo);
 		            

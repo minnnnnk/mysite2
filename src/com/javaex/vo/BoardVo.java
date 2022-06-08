@@ -26,7 +26,15 @@ public class BoardVo extends UserVo{
 		this.userNo = userNo;
 	}
 
-
+	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.hit = hit;
+		this.regDate = regDate;
+		this.userNo = userNo;
+	}
 	
 	public BoardVo(int no, String title, String content,String name, int hit, String regDate, int userNo) {
 		super();

@@ -35,12 +35,11 @@ public class BoardController extends HttpServlet {
 		}else if("read".equals(action)) {
 			System.out.println("boardController>read");
 			
-			int no = Integer.parseInt(request.getParameter("no"));
-			int userNo =Integer.parseInt(request.getParameter("userNo"));
+			int no =Integer.parseInt(request.getParameter("no"));
+			BoardDao bDao = new BoardDao();
 			
-			BoardVo bVo = new BoardVo();
-			bVo.setNo(no);
-			bVo.setUserNo(userNo);
+			BoardVo bVo = bDao.getUser(no);
+			System.out.println(bVo);
 			
 			request.setAttribute("bVo", bVo);
 			
@@ -67,15 +66,19 @@ public class BoardController extends HttpServlet {
 			WebUtil.redirect(request, response, "./board?action=list");
 		}else if("modifyForm".equals(action)) {
 			
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			int userNo = Integer.parseInt(request.getParameter("userNo"));
+
+			int no = Integer.parseInt(request.getParameter("no"));
 			
-			BoardVo bVo = new BoardVo(title,content,userNo);
 			
 			BoardDao bDao = new BoardDao();
 			
+			BoardVo bVo = bDao.getUser(no);
+			
+			request.setAttribute("bVo", bVo);
+			
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
+		}else if("modify".equals(action)) {
+			
 		}
 		
 	}
