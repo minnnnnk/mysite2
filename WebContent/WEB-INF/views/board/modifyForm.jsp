@@ -71,6 +71,7 @@
 				<div id="board">
 					<div id="modifyForm">
 						<form action="./board" method="get">
+						<input type="text" name="no" value="${bVo.no}">
 						<input type="text" name="action" value="modify">
 							<!-- 작성자 -->
 							<div class="form-group">

@@ -52,7 +52,7 @@ public class BoardController extends HttpServlet {
 			
 			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
 		}else if("write".equals(action)) {
-
+			System.out.println("boardController>write");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			int userNo = Integer.parseInt(request.getParameter("userNo"));
@@ -66,7 +66,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.redirect(request, response, "./board?action=list");
 		}else if("modifyForm".equals(action)) {
 			
-
+			System.out.println("boardController>modifyForm");
 			int no = Integer.parseInt(request.getParameter("no"));
 			
 			
@@ -78,6 +78,20 @@ public class BoardController extends HttpServlet {
 			
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
 		}else if("modify".equals(action)) {
+			System.out.println("boardController>modify");
+			
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			int no =Integer.parseInt(request.getParameter("no"));
+			
+			BoardVo bVo = new BoardVo(no,title,content);
+			System.out.println(bVo);
+			
+			BoardDao bDao = new BoardDao();
+	
+			bDao.modify(bVo);
+			WebUtil.redirect(request, response, "./board?action=list");
+		}else if("delete".equals(action)) {
 			
 		}
 		
