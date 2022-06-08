@@ -18,6 +18,8 @@ public class UserVo {
 		this.no = no;
 	}
 
+	
+	
 
 	public UserVo(int no, String password, String name, String gender) {
 		super();
