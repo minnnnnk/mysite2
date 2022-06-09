@@ -74,8 +74,8 @@ public class BoardDao {
 	         query += "         ,to_char(reg_date,'YY-MM-DD HH24:MM') reg_date ";
 	         query += "         ,user_no ";
 	         query += " from board b , users u ";
-	         query += " where user_no = u.no ";
-	         query += " order by no desc ";
+	         query += " where b.user_no = u.no ";
+	         query += " order by u.no desc ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
@@ -152,15 +152,16 @@ public class BoardDao {
 		         query += "         ,reg_date ";
 		         query += "         ,user_no ";
 		         query += " from board b , users u ";
-		         query += " where user_no = u.no ";
+		         query += " where b.user_no = u.no ";
+		         query += " and b.no= ? ";
 
 		         //바인딩
 		         pstmt = conn.prepareStatement(query);
+		         pstmt.setInt(1,no);
 		         //실행
 		         rs= pstmt.executeQuery();
 		         //결과처리
-		         while(rs.next()) {
-		        	int bno = rs.getInt("no");
+		         if(rs.next()) {
 		            String title = rs.getString("title");
 		            String content = rs.getString("content");
 		            String name = rs.getString("name");
@@ -168,7 +169,7 @@ public class BoardDao {
 		            String regDate = rs.getString("reg_date");
 		            int userNo = rs.getInt("user_no");
 		            
-		            bVo = new BoardVo(bno,title,content,name,hit,regDate,userNo);
+		            bVo = new BoardVo(no,title,content,name,hit,regDate,userNo);
 		            
 		         }
 		      } catch (SQLException e) {
@@ -258,7 +259,7 @@ public class BoardDao {
 				//실행
 				count = pstmt.executeUpdate();
 				// 4.결과처리
-				System.out.println(count+"건 삭제되었습니다.");
+				System.out.println(count+"건 변경되었습니다.");
 			}catch (SQLException e) {
 				System.out.println("error:" + e);
 			} 

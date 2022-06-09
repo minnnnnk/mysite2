@@ -77,7 +77,7 @@
 								<c:forEach items="${bList}" var="vo">
 									<tr>
 										<td>${vo.no }</td>
-										<td class="text-left"><a href="/mysite2/board?action=read&no=${vo.no}">${vo.title }</a></td>
+										<td class="text-left"><a href="/mysite2/board?action=read&no=${vo.no}">${vo.title}</a></td>
 										<td>${vo.name }</td>
 										<td>${vo.hit}</td>
 										<td>${vo.regDate}</td>

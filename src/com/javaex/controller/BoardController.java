@@ -37,6 +37,7 @@ public class BoardController extends HttpServlet {
 			
 			int no =Integer.parseInt(request.getParameter("no"));
 			BoardDao bDao = new BoardDao();
+			
 			bDao.hitUpdate(no);
 			BoardVo bVo = bDao.getUser(no);
 			
