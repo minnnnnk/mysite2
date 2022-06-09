@@ -44,7 +44,7 @@ public class BoardController extends HttpServlet {
 			BoardDao bDao = new BoardDao();
 			
 			bDao.hitUpdate(no);
-			BoardVo bVo = bDao.getUser(no);
+			BoardVo bVo = bDao.getBoard(no);
 			
 			System.out.println(bVo);
 			
@@ -76,7 +76,7 @@ public class BoardController extends HttpServlet {
 			
 			BoardDao bDao = new BoardDao();
 			
-			BoardVo bVo = bDao.getUser(no);
+			BoardVo bVo = bDao.getBoard(no);
 			
 			request.setAttribute("bVo", bVo);
 			
