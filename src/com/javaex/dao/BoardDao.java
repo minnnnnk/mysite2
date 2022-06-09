@@ -197,6 +197,7 @@ public class BoardDao {
 		         query += " from board b , users u ";
 		         query += " where b.user_no = u.no ";
 		         query += " and title like '%'||?||'%' ";
+		         query += " order by b.no desc ";
 				
 				//바인딩
 				pstmt = conn.prepareStatement(query);
