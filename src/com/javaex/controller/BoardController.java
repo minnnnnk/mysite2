@@ -54,9 +54,6 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/read.jsp");
 		}else if("writeForm".equals(action)) {
 			System.out.println("boardController>writeForm");
-			
-
-			
 			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
 		}else if("write".equals(action)) {
 			System.out.println("boardController>write");
