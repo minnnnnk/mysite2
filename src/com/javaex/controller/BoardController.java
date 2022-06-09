@@ -27,11 +27,25 @@ public class BoardController extends HttpServlet {
 		if("list".equals(action)) {
 			System.out.println("boardController>list");
 			BoardDao bDao = new BoardDao();
-			
+		
 			List<BoardVo> bList = bDao.getList();
 			
 			request.setAttribute("bList", bList);
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
+		}else if("search".equals(action)) {
+			String title = request.getParameter("title");
+			
+			BoardDao bDao = new BoardDao();
+			
+			List<BoardVo> bList  = bDao.searchList(title);
+			System.out.println(title);
+			System.out.println(bList);
+			
+			
+			request.setAttribute("bList", bList);
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
+			
 		}else if("read".equals(action)) {
 			System.out.println("boardController>read");
 			

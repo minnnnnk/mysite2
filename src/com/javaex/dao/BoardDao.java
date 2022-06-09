@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javaex.vo.BoardVo;
-import com.javaex.vo.GuestBookVo;
 
 public class BoardDao {
 	//필드
@@ -179,6 +178,55 @@ public class BoardDao {
 		      this.close();
 		      return bVo;
 		   }
+		public List<BoardVo> searchList(String title) {
+			List<BoardVo> bList = new ArrayList<BoardVo>();
+			this.getConnecting();
+			try {
+			
+				// 3. SQL문 준비 / 바인딩 / 실행
+				
+				//SQL문 준비
+		         String query = "";
+		         query += " select  b.no ";
+		         query += "         ,title ";
+		         query += "         ,content ";
+		         query += "         ,name ";
+		         query += "         ,hit ";
+		         query += "         ,to_char(reg_date,'YY-MM-DD HH24:MM') reg_date ";
+		         query += "         ,user_no ";
+		         query += " from board b , users u ";
+		         query += " where b.user_no = u.no ";
+		         query += " and title like '%'||?||'%' ";
+				
+				//바인딩
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, title);
+				//실행
+				rs = pstmt.executeQuery();
+				// 4.결과처리
+		         while(rs.next()) {
+		        	int no = rs.getInt("no");
+		        	String titlee = rs.getString("title");
+		            String content = rs.getString("content");
+		            String name = rs.getString("name");
+		            int hit = rs.getInt("hit");
+		            String regDate = rs.getString("reg_date");
+		            int userNo = rs.getInt("user_no");
+		            
+		            BoardVo bVo = new BoardVo(no,titlee,content,name,hit,regDate,userNo);
+					
+					System.out.println(bVo);
+					
+					bList.add(bVo);
+					
+					
+				}
+			}catch (SQLException e) {
+				System.out.println("error:" + e);
+			} 
+			this.close();
+			return bList;
+		}
 	   public int modify(BoardVo boardVo) {
 			int count = -1;
 			
@@ -189,6 +237,7 @@ public class BoardDao {
 				//SQL문 준비
 				String query = "";
 				query += " update board ";
+				
 				query += " set title = ?,";
 				query += "     content = ? ";
 				query += " where no = ? ";
